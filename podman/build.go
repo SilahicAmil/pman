@@ -10,6 +10,7 @@ type BuildRequest struct {
 
 func (h *HTTPClient) Build(req BuildRequest) error {
 	// use h.Get() and etc.
+	return nil
 }
 
 // Check if image exists?
