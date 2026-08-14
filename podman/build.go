@@ -1,6 +1,16 @@
 package podman
 
+type BuildRequest struct {
+	Name    string
+	Image   string
+	Context string
+}
+
 // Run the actual Podman API build commands
+
+func (h *HTTPClient) Build(req BuildRequest) error {
+	// use h.Get() and etc.
+}
 
 // Check if image exists?
 // IF does prompt use if they wanna override/continue?

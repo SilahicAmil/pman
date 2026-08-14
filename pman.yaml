@@ -1,4 +1,4 @@
-version: "1"
+tag: "latest:v1" # Pending IDEA. Keep this as the image tag?
 
 name: go-api-exmaple
 

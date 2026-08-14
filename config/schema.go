@@ -1,7 +1,7 @@
 package config
 
 type Project struct {
-	Version  string             `yaml:"version"`
+	Tag      string             `yaml:"Tag"`
 	Name     string             `yaml:"name"`
 	Services map[string]Service `yaml:"services"`
 }

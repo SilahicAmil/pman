@@ -7,10 +7,15 @@ import (
 	"os"
 
 	"ex.com/config"
+	"ex.com/podman"
 	"github.com/urfave/cli/v3"
 )
 
-func Build() *cli.Command {
+type App struct {
+	Podman *podman.HTTPClient
+}
+
+func Build(client *podman.HTTPClient) *cli.Command {
 
 	return &cli.Command{
 		Name:  "build",
@@ -45,7 +50,23 @@ func Build() *cli.Command {
 				return err
 			}
 
-			fmt.Println(parsedStruct)
+			for name, service := range parsedStruct.Services {
+				fmt.Println("name", name)
+				fmt.Println("service", service)
+				fmt.Println("context", service.Build.Context)
+				req := podman.BuildRequest{
+					Name:    name,
+					Image:   service.Image,
+					Context: service.Build.Context,
+				}
+
+				err := client.Build(req)
+
+				if err != nil {
+					log.Fatal(err)
+					return err
+				}
+			}
 
 			// fmt.Println("actual yaml file contents ", string(actFile))
 			return nil
