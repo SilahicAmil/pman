@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 
+	"ex.com/config"
 	"github.com/urfave/cli/v3"
 )
 
@@ -36,7 +37,17 @@ func Build() *cli.Command {
 				return err
 			}
 
-			fmt.Println("actual yaml file contents ", string(actFile))
+			// So pass the file tot eh YAML Parrser
+			parsedStruct, err := config.Parse(actFile)
+
+			if err != nil {
+				log.Fatal(err)
+				return err
+			}
+
+			fmt.Println(parsedStruct)
+
+			// fmt.Println("actual yaml file contents ", string(actFile))
 			return nil
 		},
 	}
